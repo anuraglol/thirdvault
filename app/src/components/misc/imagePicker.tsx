@@ -1,41 +1,28 @@
-import { profileFormAtom } from "@/lib/atoms";
 import { Box, Text } from "@chakra-ui/react";
+import { useAddress } from "@thirdweb-dev/react";
 import { Dispatch, SetStateAction, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
-import { useRecoilState } from "recoil";
 import { IFile } from "types/file.types";
-import { useAccount } from "wagmi";
 
 const ImagePicker = ({
   img,
   setImage,
 }: {
-  img: IFile;
-  setImage: Dispatch<SetStateAction<IFile>>;
+  img: File;
+  setImage: Dispatch<SetStateAction<File>>;
 }) => {
-  const [formData, setFormData] = useRecoilState(profileFormAtom);
-  const { address } = useAccount();
+  const address = useAddress();
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       const reader = new FileReader();
       reader.readAsDataURL(acceptedFiles[0]);
       reader.onload = () => {
-        setFormData({
-          ...formData,
-          avatar: reader.result,
-        });
-        setImage({
-          name: acceptedFiles[0].name,
-          size: acceptedFiles[0].size,
-          owner: address,
-          type: acceptedFiles[0].type,
-          hash: reader.result,
-        });
+        setImage(acceptedFiles[0]);
       };
     },
-    [setFormData, formData, address, setImage]
+    [setImage]
   );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 

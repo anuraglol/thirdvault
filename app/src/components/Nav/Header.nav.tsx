@@ -2,12 +2,13 @@ import { Button, Flex, Text } from "@chakra-ui/react";
 import { NextComponentType } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useAccount } from "wagmi";
-import { ConnectWallet } from "../misc/ConnectButton";
+import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
 
 const Header: NextComponentType = () => {
   const router = useRouter();
-  const { address } = useAccount();
+
+  const connectWithMetamask = useMetamask();
+  const address = useAddress();
 
   return (
     <Flex
@@ -29,7 +30,23 @@ const Header: NextComponentType = () => {
       </Link>
 
       <Flex gap="2" align="center">
-        <ConnectWallet />
+        {/* <ConnectWallet /> */}
+
+        {address ? (
+          <Flex>{address}</Flex>
+        ) : (
+          <Button
+            colorScheme="purple"
+            onClick={connectWithMetamask}
+            fontWeight="500"
+            fontSize="md"
+            py="1"
+            px="6"
+            h="2.3rem"
+          >
+            Connect Wallet
+          </Button>
+        )}
 
         <Button
           colorScheme="purple"

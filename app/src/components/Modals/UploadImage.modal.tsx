@@ -11,36 +11,20 @@ import { modalProps } from "types/modalProps.types";
 import { FC, useState } from "react";
 import { ImagePicker } from "../misc/imagePicker";
 import { IFile } from "types/file.types";
-import { useAccount, useSignMessage } from "wagmi";
-import { encryptBlob } from "@/utils/helpers/handleFile";
-import { uploadFile } from "@/utils/helpers/uploadFile";
 import axios from "axios";
+import { client } from "@/lib/web3Storage.client";
 
-const SetupProfileModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
-  const [img, setImage] = useState<IFile>(null);
-  const { address } = useAccount();
-
-  const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
-    message: "gm wagmi frens",
-  });
-
-  console.log(data, isError, isLoading, isSuccess);
+const UploadImageModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
+  const [img, setImage] = useState<File>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleUpload = async () => {
-    signMessage();
-    console.log(data);
-    // const encryptedHash = encryptBlob(img.hash, address);
+    const cid = await client.put([img]);
 
-    // const data = {
-    //   hash: encryptedHash,
-    //   name: img.name,
-    //   size: img.size,
-    //   type: img.type,
-    //   owner: img.owner,
-    // };
-
-    // const res = await uploadFile(data, data.name);
-    // console.log(res);
+    let res = await axios.post("/api/upload", {
+      cid: cid,
+    });
+    console.log(res.data);
   };
 
   return (
@@ -75,6 +59,8 @@ const SetupProfileModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
             h="2.3rem"
             w="52"
             onClick={handleUpload}
+            isDisabled={img === null}
+            isLoading={loading}
           >
             Upload Image
           </Button>
@@ -84,4 +70,4 @@ const SetupProfileModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
   );
 };
 
-export default SetupProfileModal;
+export default UploadImageModal;

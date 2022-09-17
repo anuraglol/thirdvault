@@ -11,18 +11,20 @@ import { modalProps } from "types/modalProps.types";
 import { FC, useState } from "react";
 import { FilePicker } from "../misc/filePicker";
 import { IFile } from "types/file.types";
-import { encryptBlob } from "@/utils/helpers/handleFile";
-import { useAccount } from "wagmi";
+import axios from "axios";
 
 const UploadFileModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
   const [file, setFile] = useState<IFile>(null);
-  const { address } = useAccount();
-  console.log(file);
 
   const handleUpload = async () => {
-    const encryptedHash = encryptBlob(file.hash, address);
+    console.log("uploading file");
+    let res = await axios.post("/api/upload", {
+      hash: file.hash,
+      name: file.name,
+      type: file.type,
+    });
 
-    console.log(encryptedHash);
+    console.log(res.data);
   };
 
   return (
@@ -57,6 +59,7 @@ const UploadFileModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
             h="2.3rem"
             w="52"
             onClick={handleUpload}
+            isDisabled={file === null}
           >
             Upload File
           </Button>

@@ -1,4 +1,4 @@
-import {MainLayout} from "@/layouts";
+import { MainLayout } from "@/layouts";
 import { Hero } from "@/components";
 import { NextPage } from "next";
 

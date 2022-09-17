@@ -1,9 +1,7 @@
-import { profileFormAtom } from "@/lib/atoms";
 import { Box, Text } from "@chakra-ui/react";
+import { useAddress } from "@thirdweb-dev/react";
 import { Dispatch, SetStateAction, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { useRecoilState } from "recoil";
-import { useAccount } from "wagmi";
 import type { IFile } from "types/file.types";
 
 const FilePicker = ({
@@ -13,18 +11,13 @@ const FilePicker = ({
   file: IFile;
   setFile: Dispatch<SetStateAction<IFile>>;
 }) => {
-  const [formData, setFormData] = useRecoilState(profileFormAtom);
-  const { address } = useAccount();
+  const address = useAddress();
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       const reader = new FileReader();
       reader.readAsDataURL(acceptedFiles[0]);
       reader.onload = () => {
-        setFormData({
-          ...formData,
-          avatar: reader.result,
-        });
         setFile({
           name: acceptedFiles[0].name,
           size: acceptedFiles[0].size,
@@ -34,7 +27,7 @@ const FilePicker = ({
         });
       };
     },
-    [setFormData, formData, setFile, address]
+    [setFile, address]
   );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 

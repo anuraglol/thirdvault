@@ -1,29 +1,17 @@
-import { createCipheriv, createDecipheriv } from "crypto";
+import { AES } from "crypto-js";
 
-export class Encrypter {
+class Encrypter {
   static encrypt = async (data: string) => {
-    const cipher = createCipheriv(
-      "aes256",
-      Buffer.from(process.env.KEY!, "hex"),
-      Buffer.from(process.env.IV!, "hex")
-    );
-    const encryptedData =
-      cipher.update(data, "utf8", "hex") + cipher.final("hex");
+    const encryptedVal = AES.encrypt(data, process.env.SECRET_KEY).toString();
 
-    return encryptedData;
+    return encryptedVal;
   };
 
   static decrypt = async (data: string) => {
-    const decipher = createDecipheriv(
-      "aes256",
-      Buffer.from(process.env.KEY!, "hex"),
-      Buffer.from(process.env.IV!, "hex")
-    );
-    const decryptedData =
-      decipher.update(data, "hex", "utf-8") + decipher.final("utf8");
+    const decryptedVal = AES.decrypt(data, process.env.SECRET_KEY).toString();
 
-    return decryptedData;
+    return decryptedVal;
   };
 }
 
-export default Encrypter;
+export { Encrypter };

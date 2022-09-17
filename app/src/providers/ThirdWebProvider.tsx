@@ -1,19 +1,22 @@
-import "@rainbow-me/rainbowkit/styles.css";
 import { useSigner } from "wagmi";
-import { ChainId, ThirdwebSDKProvider } from "@thirdweb-dev/react";
+import {
+  ChainId,
+  ThirdwebSDKProvider,
+  ThirdwebProvider as RealThirdwebProvider,
+} from "@thirdweb-dev/react";
 
 const ThirdwebProvider = ({ wagmiClient, children }: any) => {
   const { data: signer } = useSigner();
 
   return (
-    <ThirdwebSDKProvider
+    <RealThirdwebProvider
       desiredChainId={ChainId.Mumbai}
-      signer={signer as any}
+      signer={signer}
       provider={wagmiClient.provider}
       queryClient={wagmiClient.queryClient as any}
     >
       {children}
-    </ThirdwebSDKProvider>
+    </RealThirdwebProvider>
   );
 };
 

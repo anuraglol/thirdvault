@@ -6,8 +6,8 @@ specifiers:
   '@emotion/styled': ^11.10.4
   '@fontsource/argentum-sans': ^4.5.0
   '@rainbow-me/rainbowkit': ^0.5.3
-  '@thirdweb-dev/react': ^3.0.1
-  '@thirdweb-dev/sdk': ^3.0.1
+  '@thirdweb-dev/react': ^3.0.2
+  '@thirdweb-dev/sdk': ^3.0.2
   '@types/crypto-js': ^4.1.1
   '@types/node': 18.7.18
   '@types/react': 18.0.20
@@ -25,8 +25,8 @@ specifiers:
   react-hot-toast: ^2.4.0
   react-icons: ^4.4.0
   react-typed: ^1.2.0
-  recoil: ^0.7.5
   typescript: 4.8.3
+  uuidv4: ^6.2.13
   wagmi: ^0.6.6
   web3.storage: ^4.4.0
 
@@ -36,8 +36,8 @@ dependencies:
   '@emotion/styled': 11.10.4_yiaqs725o7pcd7rteavrnhgj4y
   '@fontsource/argentum-sans': 4.5.0
   '@rainbow-me/rainbowkit': 0.5.3_77hisva6i3lzqozyotowjactue
-  '@thirdweb-dev/react': 3.0.1_apfi3u3k5q5g5o47335acmvee4
-  '@thirdweb-dev/sdk': 3.0.1_ethers@5.7.1
+  '@thirdweb-dev/react': 3.0.2_jwbapkk2vvy5q6imsvufrtnrwu
+  '@thirdweb-dev/sdk': 3.0.2_ethers@5.7.1
   axios: 0.27.2
   crypto-js: 4.1.1
   ethers: 5.7.1
@@ -49,7 +49,7 @@ dependencies:
   react-hot-toast: 2.4.0_biqbaboplfbrettd7655fr4n2y
   react-icons: 4.4.0_react@18.2.0
   react-typed: 1.2.0_biqbaboplfbrettd7655fr4n2y
-  recoil: 0.7.5_biqbaboplfbrettd7655fr4n2y
+  uuidv4: 6.2.13
   wagmi: 0.6.6_nznuxirfauibn2fjde2ghjonky
   web3.storage: 4.4.0_typescript@4.8.3
 
@@ -2320,10 +2320,10 @@ packages:
     resolution: {integrity: sha512-PiQjdRcAUBlu3poc4g6dN9KvjTgYsA1Vi+B/IgryptCgcJeMY4cldMabKCgPaCg9dPVpUq4O+SOM00P6mBNvGw==}
     dev: false
 
-  /@thirdweb-dev/react/3.0.1_apfi3u3k5q5g5o47335acmvee4:
-    resolution: {integrity: sha512-rdv4Sg4XmsiKoKcc0nu+0BU+PN1dP9C6MdHF5Ra1k1mBfQ7Fb4XdRO5RMrntYqaWkxnKT5FRSr91eBlmq009qg==}
+  /@thirdweb-dev/react/3.0.2_jwbapkk2vvy5q6imsvufrtnrwu:
+    resolution: {integrity: sha512-8C/eiCFbsX+FMYeEID4hYxNKz2viDTkJ1sZP+/LcK85KVS93yhP/WzrkyacD5qenv1jDI4rbH6gZ5JC9BlAqog==}
     peerDependencies:
-      '@thirdweb-dev/sdk': ^3.0.1
+      '@thirdweb-dev/sdk': ^3.0.2
       ethers: '>=5.5.1'
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -2335,7 +2335,7 @@ packages:
       '@gnosis.pm/safe-ethers-lib': 1.1.0_ethers@5.7.1
       '@react-icons/all-files': 4.1.0_react@18.2.0
       '@tanstack/react-query': 4.3.4_biqbaboplfbrettd7655fr4n2y
-      '@thirdweb-dev/sdk': 3.0.1_ethers@5.7.1
+      '@thirdweb-dev/sdk': 3.0.2_ethers@5.7.1
       '@zag-js/menu': 0.1.14
       '@zag-js/react': 0.1.16_react@18.2.0
       color: 4.2.3
@@ -2364,8 +2364,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@thirdweb-dev/sdk/3.0.1_ethers@5.7.1:
-    resolution: {integrity: sha512-Dd2VlqivNDXeXRVJ+ahUpo0rP7Tjra6vcHrRptt7L7zLWRYsvO5byVFReyi29FcjSyPtCr1wmR/8+gHAcQk25A==}
+  /@thirdweb-dev/sdk/3.0.2_ethers@5.7.1:
+    resolution: {integrity: sha512-rZxWSlZ6XuTSn9s3Fo7mzfzEZI9l2mSYhBqEvZttH0sbftioeG8KT5GUpsHFxTVRLw634J3aHzP0X+zKmyGIHw==}
     peerDependencies:
       ethers: ^5
     dependencies:
@@ -2495,6 +2495,10 @@ packages:
     resolution: {integrity: sha512-Da66lEIFeIz9ltsdMZcpQvmrmmoqrfju8pm1BH8WbYjZSwUgCwXLb9C+9XYogwBITnbsSaMdVPb2ekf7TV+03w==}
     dependencies:
       '@types/node': 18.7.18
+    dev: false
+
+  /@types/uuid/8.3.4:
+    resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
     dev: false
 
   /@types/ws/7.4.7:
@@ -5226,10 +5230,6 @@ packages:
       uint8arrays: 3.1.0
     dev: false
 
-  /hamt_plus/1.0.2:
-    resolution: {integrity: sha512-t2JXKaehnMb9paaYA7J0BX8QQAY8lwfQ9Gjf4pg/mk4krt+cmwmU652HOoWonf+7+EQV97ARPMhhVgU1ra2GhA==}
-    dev: false
-
   /hard-rejection/2.1.0:
     resolution: {integrity: sha512-VIZB+ibDhx7ObhAe7OVtoEbuP4h/MuOTHJ+J8h/eBXotJYl0fBgR72xDFCKgIh22OJZIOVNxBMWuhAr10r8HdA==}
     engines: {node: '>=6'}
@@ -7059,23 +7059,6 @@ packages:
       ms: 2.1.3
     dev: false
 
-  /recoil/0.7.5_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-GVShsj5+M/2GULWBs5WBJGcsNis/d3YvDiaKjYh3mLKXftjtmk9kfaQ8jwjoIXySCwn8/RhgJ4Sshwgzj2UpFA==}
-    peerDependencies:
-      react: '>=16.13.1'
-      react-dom: '*'
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      hamt_plus: 1.0.2
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    dev: false
-
   /redent/3.0.0:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
     engines: {node: '>=8'}
@@ -7821,6 +7804,13 @@ packages:
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
+    dev: false
+
+  /uuidv4/6.2.13:
+    resolution: {integrity: sha512-AXyzMjazYB3ovL3q051VLH06Ixj//Knx7QnUSi1T//Ie3io6CpsPu9nVMOx5MoLWh6xV0B9J0hIaxungxXUbPQ==}
+    dependencies:
+      '@types/uuid': 8.3.4
+      uuid: 8.3.2
     dev: false
 
   /v8-compile-cache/2.3.0:

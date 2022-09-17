@@ -1,1 +1,1 @@
-export { submitProfile } from "./helpers/submitProfile"
+export { Encrypter } from "./helpers/handleEncryption";
