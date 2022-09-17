@@ -1,4 +1,4 @@
-import { Header, Sidebar } from "@/components";
+import { Header } from "@/components";
 import Blob from "@/components/Landing/Blob";
 import { Box } from "@chakra-ui/react";
 import { FC, ReactNode } from "react";
@@ -21,7 +21,6 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
     >
       {children}
       <Header />
-      <Sidebar />
       <Blob bg="purple.600" left="0" zIndex="0" />
       <Blob bg="pink.600" right="0" zIndex="0" />
     </Box>

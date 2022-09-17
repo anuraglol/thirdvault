@@ -28,7 +28,7 @@ const UploadFileModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
   };
 
   return (
-    <Modal isOpen onClose={onClose} size="lg" isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
       <ModalOverlay />
       <ModalContent bgColor="#080910" color="white">
         <ModalHeader

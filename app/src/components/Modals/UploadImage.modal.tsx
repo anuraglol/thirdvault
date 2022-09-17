@@ -10,25 +10,48 @@ import {
 import { modalProps } from "types/modalProps.types";
 import { FC, useState } from "react";
 import { ImagePicker } from "../misc/imagePicker";
-import { IFile } from "types/file.types";
 import axios from "axios";
 import { client } from "@/lib/web3Storage.client";
+import { useContract, useContractWrite } from "@thirdweb-dev/react";
+import { CONTRACT_ADDRESS } from "@/lib/constants";
+import { uuid } from "uuidv4";
 
 const UploadImageModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
   const [img, setImage] = useState<File>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleUpload = async () => {
-    const cid = await client.put([img]);
+  const { contract } = useContract(
+    "0xffBF525780441bAfA954743FA61928D8BB54530b"
+  );
+  const { mutateAsync: addFile, isLoading } = useContractWrite(
+    contract,
+    "addFile"
+  );
 
-    let res = await axios.post("/api/upload", {
-      cid: cid,
-    });
-    console.log(res.data);
+  const handleUpload = async () => {
+    setLoading(true);
+
+    try {
+      const cid = await client.put([img]);
+
+      let res = await axios.post("/api/upload", {
+        cid: cid,
+      });
+
+      console.log(res.data.hash);
+      const uid = uuid();
+
+      const data = await addFile([img.name, uid, img.type, img.size, res.data.hash]);
+      console.info("contract call successs", data);
+    } catch (err) {
+      console.error("contract call failure", err);
+    }
+
+    setLoading(false);
   };
 
   return (
-    <Modal isOpen onClose={onClose} size="lg" isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
       <ModalOverlay />
       <ModalContent bgColor="#080910" color="white">
         <ModalHeader

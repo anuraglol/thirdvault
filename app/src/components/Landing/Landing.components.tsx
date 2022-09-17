@@ -48,19 +48,19 @@ const MainText = () => {
             fontFamily="argentum"
         >
             <Box display="flex">
-                Celebrate and Mint&nbsp;
+                Store all your&nbsp;
                 <Text color="pink.500" display={{ base: 'block', lg: 'none' }}>
-                    wins
+                    files
                 </Text>
                 <Text color="pink.500" display={{ base: 'none', lg: 'block' }}>
                     <ReactTyped
                         loop
-                        strings={['wins', 'achievements']}
+                        strings={['images', 'files']}
                         typeSpeed={50}
                     />
                 </Text>
             </Box>
-            <Text>as NFTs, together</Text>
+            <Text>on your own Vault!</Text>
         </Box>
     );
 };

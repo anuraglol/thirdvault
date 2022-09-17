@@ -13,6 +13,7 @@ specifiers:
   '@types/react': 18.0.20
   '@types/react-dom': 18.0.6
   axios: ^0.27.2
+  boring-avatars: ^1.7.0
   crypto-js: ^4.1.1
   eslint: 8.23.1
   eslint-config-next: 12.3.0
@@ -39,6 +40,7 @@ dependencies:
   '@thirdweb-dev/react': 3.0.2_jwbapkk2vvy5q6imsvufrtnrwu
   '@thirdweb-dev/sdk': 3.0.2_ethers@5.7.1
   axios: 0.27.2
+  boring-avatars: 1.7.0
   crypto-js: 4.1.1
   ethers: 5.7.1
   framer-motion: 7.3.5_biqbaboplfbrettd7655fr4n2y
@@ -3438,6 +3440,10 @@ packages:
 
   /bn.js/5.2.1:
     resolution: {integrity: sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==}
+    dev: false
+
+  /boring-avatars/1.7.0:
+    resolution: {integrity: sha512-ZNHd8J7C/V0IjQMGQowLJ5rScEFU23WxePigH6rqKcT2Esf0qhYvYxw8s9i3srmlfCnCV00ddBjaoGey1eNOfA==}
     dev: false
 
   /borsh/0.7.0:

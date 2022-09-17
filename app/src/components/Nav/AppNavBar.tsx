@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
 
-const Header: NextComponentType = () => {
+const AppNavBar: NextComponentType = () => {
   const router = useRouter();
 
   const connectWithMetamask = useMetamask();
@@ -17,21 +17,14 @@ const Header: NextComponentType = () => {
       borderBottomColor="rgb(34, 35, 37)"
       h="14"
       justifyContent="space-between"
-      position="fixed"
-      px={["4", "16"]}
       textColor="white"
-      top="0"
       w="full"
     >
-      <Link href="/">
-        <Text cursor="pointer" fontSize="xl" fontWeight="500">
-          solkudos
-        </Text>
-      </Link>
+      <Text cursor="pointer" fontSize="2xl" fontWeight="500">
+        vault
+      </Text>
 
       <Flex gap="2" align="center">
-        {/* <ConnectWallet /> */}
-
         {address ? (
           <Flex
             _hover={{ bg: "#131314", textDecoration: "none" }}
@@ -83,4 +76,4 @@ const Header: NextComponentType = () => {
   );
 };
 
-export default Header;
+export default AppNavBar;
