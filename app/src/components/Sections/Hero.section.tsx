@@ -34,7 +34,7 @@ const Hero: NextComponentType = () => {
           if (!address) {
             toast.error("Please connect your wallet first");
           } else {
-            router.push("/app");
+            router.push("/dashboard");
           }
         }}
       >

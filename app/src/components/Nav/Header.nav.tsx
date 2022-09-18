@@ -40,7 +40,7 @@ const Header: NextComponentType = () => {
           px="6"
           h="2.2rem"
           rounded="full"
-          onClick={() => router.push("/app")}
+          onClick={() => router.push("/dashboard")}
           isDisabled={!address}
         >
           App
