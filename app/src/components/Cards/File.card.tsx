@@ -114,7 +114,7 @@ const FileCard: FC<IProps> = ({ file }) => {
 
       <Flex h="40%" px="8" align="center" justifyContent="space-between">
         <Text fontSize="lg" color="rgba(255, 255, 255, 0.8)" noOfLines={1}>
-          {file.name.length > 10
+          {file.name.length > 18
             ? file.name.substring(0, 12) + "..." + file.name.split(".")[1]
             : file.name}
         </Text>
