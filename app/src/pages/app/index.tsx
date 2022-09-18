@@ -1,18 +1,13 @@
 import { UploadFileModal, UploadImageModal } from "@/components";
 import { Box, Flex, Spinner, Text, useDisclosure } from "@chakra-ui/react";
 import { NextPage } from "next";
-import {
-  contractType,
-  useAddress,
-  useContract,
-  useContractRead,
-} from "@thirdweb-dev/react";
+import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "@/lib/constants";
 import { BoringAva } from "@/components/misc/boringAva";
 import { UploadCard } from "@/components/Cards/Upload.card";
 import AppNavBar from "@/components/Nav/AppNavBar";
 import { FileCard } from "@/components/Cards/File.card";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { IFile } from "types/file.types";
 
 const IndexPage: NextPage = () => {
@@ -24,6 +19,7 @@ const IndexPage: NextPage = () => {
     onOpen: onOpen2,
     onClose: onClose2,
   } = useDisclosure();
+  const [filesToShow, setFilesToShow] = useState<"all" | "images">("all");
 
   const { contract } = useContract(CONTRACT_ADDRESS);
   const { data, isLoading } = useContractRead(contract, "getFiles");
@@ -46,6 +42,15 @@ const IndexPage: NextPage = () => {
       return newArr;
     }
   }, [address, data, isLoading]);
+  console.log(userData);
+
+  const dataToShow = useMemo(() => {
+    if (filesToShow === "all") {
+      return userData;
+    } else {
+      return userData.filter((file) => file.type.split("/")[0] === "image");
+    }
+  }, [userData, filesToShow]);
 
   return (
     <Box
@@ -69,15 +74,29 @@ const IndexPage: NextPage = () => {
           </Text>
         </Flex>
 
-        <Flex
-          gap="4"
-          color="rgba(255, 255, 255, 0.8)"
-          fontSize="xl"
-          fontWeight="400"
-          align="center"
-        >
-          <Text>Images</Text>
-          <Text>Files</Text>
+        <Flex gap="4" fontSize="xl" fontWeight="400" align="center">
+          <Text
+            color={
+              filesToShow === "all"
+                ? "rgba(255, 255, 255, 0.8)"
+                : "whiteAlpha.600"
+            }
+            cursor="pointer"
+            onClick={() => setFilesToShow("all")}
+          >
+            All
+          </Text>
+          <Text
+            color={
+              filesToShow === "images"
+                ? "rgba(255, 255, 255, 0.8)"
+                : "whiteAlpha.600"
+            }
+            cursor="pointer"
+            onClick={() => setFilesToShow("images")}
+          >
+            Images
+          </Text>
         </Flex>
       </Flex>
 
@@ -99,7 +118,7 @@ const IndexPage: NextPage = () => {
             <>
               {userData?.length > 0 ? (
                 <Flex my="8" gap="10" flexWrap="wrap">
-                  {userData.map((file: IFile) => (
+                  {dataToShow.map((file: IFile) => (
                     <FileCard file={file} key={file.uid} />
                   ))}
                 </Flex>
