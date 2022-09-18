@@ -15,14 +15,13 @@ import { client } from "@/lib/web3Storage.client";
 import { useContract, useContractWrite } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "@/lib/constants";
 import { uuid } from "uuidv4";
+import toast from "react-hot-toast";
 
 const UploadImageModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
   const [img, setImage] = useState<File>(null);
   const [loading, setLoading] = useState(false);
 
-  const { contract } = useContract(
-    "0xffBF525780441bAfA954743FA61928D8BB54530b"
-  );
+  const { contract } = useContract(CONTRACT_ADDRESS);
   const { mutateAsync: addFile, isLoading } = useContractWrite(
     contract,
     "addFile"
@@ -38,16 +37,26 @@ const UploadImageModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
         cid: cid,
       });
 
-      console.log(res.data.hash);
       const uid = uuid();
 
-      const data = await addFile([img.name, uid, img.type, img.size, res.data.hash]);
-      console.info("contract call successs", data);
-    } catch (err) {
-      console.error("contract call failure", err);
-    }
+      const data = await addFile([
+        img.name,
+        uid,
+        img.type,
+        img.size,
+        res.data.hash,
+      ]);
 
-    setLoading(false);
+      toast.success("Image uploaded successfully!");
+      setLoading(false);
+
+      onClose();
+    } catch (err) {
+      console.log(err);
+      toast.error("Oops! Upload failed");
+      setLoading(false);
+      onClose();
+    }
   };
 
   return (

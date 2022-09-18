@@ -1,6 +1,7 @@
 import {
   Box,
   Flex,
+  Image,
   Menu,
   MenuButton,
   MenuDivider,
@@ -8,11 +9,62 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import { FC } from "react";
+import axios from "axios";
+import { FC, useEffect, useMemo, useState } from "react";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsDownload, BsTrash } from "react-icons/bs";
+import { IFile } from "types/file.types";
+import { useContract, useContractWrite } from "@thirdweb-dev/react";
+import { CONTRACT_ADDRESS } from "@/lib/constants";
+import toast from "react-hot-toast";
+import download from "downloadjs";
 
-const FileCard: FC = () => {
+interface IProps {
+  file: IFile;
+}
+
+const FileCard: FC<IProps> = ({ file }) => {
+  console.log(file);
+  const { contract } = useContract(CONTRACT_ADDRESS);
+  const { mutateAsync: deleteFile, isLoading } = useContractWrite(
+    contract,
+    "deleteFile"
+  );
+
+  const [fileUrl, setFileUrl] = useState<string>("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.post("/api/decrypt", {
+        hash: file.cid,
+      });
+
+      const url = `https://ipfs.io/ipfs/${res.data.cid}/${file.name}`;
+      console.log(url);
+      setFileUrl(url);
+    };
+
+    fetchData();
+  }, [file.cid, file.name]);
+
+  const handleDelete = async () => {
+    try {
+      const data = await deleteFile([file.uid]);
+
+      toast.success("File deleted successfully");
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
+  };
+
+  const isImage = useMemo(() => {
+    if (file.type.split("/")[0] === "image") {
+      return true;
+    } else {
+      return false;
+    }
+  }, [file.type]);
+
   return (
     <Box
       w="72"
@@ -27,17 +79,42 @@ const FileCard: FC = () => {
       flexDir="column"
       cursor="pointer"
     >
-      <Box h="60%" bgColor="#fff" roundedTop="md"></Box>
+      {isImage ? (
+        <Box
+          h="60%"
+          bgColor="#fafafa"
+          roundedTop="md"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Image src={fileUrl} alt={file.name} h="80%" />
+        </Box>
+      ) : (
+        <Box
+          h="60%"
+          bgColor="#fff"
+          roundedTop="md"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          color="blackAlpha.800"
+          px="8"
+        >
+          <Text fontWeight="500" noOfLines={1}>
+            {file.name.length > 10
+              ? file.name.substring(0, 12) + "..." + file.name.split(".")[1]
+              : file.name}
+          </Text>
+        </Box>
+      )}
 
       <Flex h="40%" px="8" align="center" justifyContent="space-between">
-        <Flex direction="column">
-          <Text fontSize="lg" color="rgba(255, 255, 255, 0.8)">
-            Nice Image
-          </Text>
-          <Text fontSize="sm" color="rgba(255, 255, 255, 0.6)">
-            690KB
-          </Text>
-        </Flex>
+        <Text fontSize="lg" color="rgba(255, 255, 255, 0.8)" noOfLines={1}>
+          {file.name.length > 10
+            ? file.name.substring(0, 12) + "..." + file.name.split(".")[1]
+            : file.name}
+        </Text>
 
         <Menu>
           <MenuButton>
@@ -45,11 +122,21 @@ const FileCard: FC = () => {
           </MenuButton>
 
           <MenuList>
-            <MenuItem icon={<BsDownload size={18} />} color="blue.500">
+            <MenuItem
+              icon={<BsDownload size={18} />}
+              color="blue.500"
+              onClick={() => {
+                download(fileUrl);
+              }}
+            >
               Download
             </MenuItem>
             <MenuDivider />
-            <MenuItem icon={<BsTrash size={18} />} color="red.500">
+            <MenuItem
+              icon={<BsTrash size={18} />}
+              color="red.500"
+              onClick={handleDelete}
+            >
               Delete
             </MenuItem>
           </MenuList>

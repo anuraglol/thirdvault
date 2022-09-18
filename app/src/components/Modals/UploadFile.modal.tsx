@@ -10,21 +10,51 @@ import {
 import { modalProps } from "types/modalProps.types";
 import { FC, useState } from "react";
 import { FilePicker } from "../misc/filePicker";
-import { IFile } from "types/file.types";
+import { useContract, useContractWrite } from "@thirdweb-dev/react";
 import axios from "axios";
+import { client } from "@/lib/web3Storage.client";
+import { CONTRACT_ADDRESS } from "@/lib/constants";
+import { uuid } from "uuidv4";
+import toast from "react-hot-toast";
 
 const UploadFileModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
-  const [file, setFile] = useState<IFile>(null);
+  const [file, setFile] = useState<File>(null);
+  const [loading, setLoading] = useState(false);
+
+  const { contract } = useContract(CONTRACT_ADDRESS);
+  const { mutateAsync: addFile, isLoading } = useContractWrite(
+    contract,
+    "addFile"
+  );
 
   const handleUpload = async () => {
-    console.log("uploading file");
-    let res = await axios.post("/api/upload", {
-      hash: file.hash,
-      name: file.name,
-      type: file.type,
-    });
+    setLoading(true);
 
-    console.log(res.data);
+    try {
+      const cid = await client.put([file]);
+
+      let res = await axios.post("/api/upload", {
+        cid: cid,
+      });
+
+      const uid = uuid();
+
+      const data = await addFile([
+        file.name,
+        uid,
+        file.type,
+        file.size,
+        res.data.hash,
+      ]);
+
+      toast.success("File uploaded successfully!");
+      setLoading(false);
+      onClose();
+    } catch (err) {
+      toast.error("Oops! Upload failed");
+      setLoading(false);
+      onClose();
+    }
   };
 
   return (
@@ -60,6 +90,7 @@ const UploadFileModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
             w="52"
             onClick={handleUpload}
             isDisabled={file === null}
+            isLoading={loading}
           >
             Upload File
           </Button>

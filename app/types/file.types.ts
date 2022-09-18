@@ -1,9 +1,10 @@
 interface IFile {
   name: string;
-  hash: string | ArrayBuffer;
-  size: number;
   type: string;
+  uid: string;
+  cid: string;
   owner: string;
+  size: string;
 }
 
 export type { IFile };

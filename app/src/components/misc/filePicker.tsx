@@ -1,33 +1,23 @@
 import { Box, Text } from "@chakra-ui/react";
-import { useAddress } from "@thirdweb-dev/react";
 import { Dispatch, SetStateAction, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import type { IFile } from "types/file.types";
 
 const FilePicker = ({
   file,
   setFile,
 }: {
-  file: IFile;
-  setFile: Dispatch<SetStateAction<IFile>>;
+  file: File;
+  setFile: Dispatch<SetStateAction<File>>;
 }) => {
-  const address = useAddress();
-
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       const reader = new FileReader();
       reader.readAsDataURL(acceptedFiles[0]);
       reader.onload = () => {
-        setFile({
-          name: acceptedFiles[0].name,
-          size: acceptedFiles[0].size,
-          type: acceptedFiles[0].type,
-          hash: reader.result,
-          owner: address,
-        });
+        setFile(acceptedFiles[0]);
       };
     },
-    [setFile, address]
+    [setFile]
   );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 

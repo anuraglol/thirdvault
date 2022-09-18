@@ -9,12 +9,14 @@ specifiers:
   '@thirdweb-dev/react': ^3.0.2
   '@thirdweb-dev/sdk': ^3.0.2
   '@types/crypto-js': ^4.1.1
+  '@types/downloadjs': ^1.4.3
   '@types/node': 18.7.18
   '@types/react': 18.0.20
   '@types/react-dom': 18.0.6
   axios: ^0.27.2
   boring-avatars: ^1.7.0
   crypto-js: ^4.1.1
+  downloadjs: ^1.4.7
   eslint: 8.23.1
   eslint-config-next: 12.3.0
   ethers: ^5.7.1
@@ -42,6 +44,7 @@ dependencies:
   axios: 0.27.2
   boring-avatars: 1.7.0
   crypto-js: 4.1.1
+  downloadjs: 1.4.7
   ethers: 5.7.1
   framer-motion: 7.3.5_biqbaboplfbrettd7655fr4n2y
   next: 12.3.0_biqbaboplfbrettd7655fr4n2y
@@ -57,6 +60,7 @@ dependencies:
 
 devDependencies:
   '@types/crypto-js': 4.1.1
+  '@types/downloadjs': 1.4.3
   '@types/node': 18.7.18
   '@types/react': 18.0.20
   '@types/react-dom': 18.0.6
@@ -2420,6 +2424,10 @@ packages:
     resolution: {integrity: sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==}
     dev: true
 
+  /@types/downloadjs/1.4.3:
+    resolution: {integrity: sha512-MjJepFle/tLtT2/jmDNth6ZnwWzEhm40L+olE5HKR70ISUCfgT55eqreeHldAzFLY2HDUGsn8zgyto8KygN0CA==}
+    dev: true
+
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: false
@@ -4008,6 +4016,10 @@ packages:
 
   /dom-walk/0.1.2:
     resolution: {integrity: sha512-6QvTW9mrGeIegrFXdtQi9pk7O/nSK6lSdXW2eqUspN5LWD7UTji2Fqw5V2YLjBpHEoU9Xl/eUWNpDeZvoyOv2w==}
+    dev: false
+
+  /downloadjs/1.4.7:
+    resolution: {integrity: sha512-LN1gO7+u9xjU5oEScGFKvXhYf7Y/empUIIEAGBs1LzUq/rg5duiDrkuH5A2lQGd5jfMOb9X9usDa2oVXwJ0U/Q==}
     dev: false
 
   /eip1193-provider/1.0.1:

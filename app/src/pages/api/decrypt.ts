@@ -1,22 +1,19 @@
-import { client } from "@/lib/web3Storage.client";
+import { Encrypter } from "@/utils";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const { cid } = req.body;
+    const { hash } = req.body;
+    if (hash) {
+      const decrypted = await Encrypter.decrypt(hash);
 
-    try {
-      const response = await client.get(cid);
+      const utf8 = Buffer.from(decrypted, "hex").toString("utf8");
 
       res.status(200).json({
-        success: true,
-        data: response,
+        cid: utf8,
       });
-    } catch (error) {
-      res.status(400).json({
-        success: false,
-        error: error.message,
-      });
+    } else {
+      res.status(400).json({ error: "Missing hash" });
     }
   } else {
     res.status(405).json({ message: "Method not allowed" });

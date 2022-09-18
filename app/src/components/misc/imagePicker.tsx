@@ -1,9 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
-import { useAddress } from "@thirdweb-dev/react";
 import { Dispatch, SetStateAction, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
-import { IFile } from "types/file.types";
 
 const ImagePicker = ({
   img,
@@ -12,8 +10,6 @@ const ImagePicker = ({
   img: File;
   setImage: Dispatch<SetStateAction<File>>;
 }) => {
-  const address = useAddress();
-
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       const reader = new FileReader();
