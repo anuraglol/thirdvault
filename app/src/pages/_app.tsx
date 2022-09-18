@@ -9,6 +9,7 @@ import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import { Toaster } from "react-hot-toast";
 import { RecoilRoot } from "recoil";
 import { NextSeo } from "next-seo";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -42,6 +43,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           cardType: "summary_large_image",
         }}
       />
+      <Head>
+        <link rel="icon" href="/assets/icon.png" type="image/png" />
+      </Head>
       <RecoilRoot>
         <ThirdwebProvider desiredChainId={ChainId.Mumbai} autoConnect>
           <Toaster />

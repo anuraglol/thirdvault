@@ -1,4 +1,4 @@
-# thirdvault
+# ![icon](/app/public/assets/icon.svg)
 
 Store all your secret files on your own secured vault, powered by IPFS and thirdweb.
 
