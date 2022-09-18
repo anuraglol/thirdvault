@@ -17,7 +17,7 @@ const Header: NextComponentType = () => {
       borderBottomColor="rgb(34, 35, 37)"
       h="14"
       justifyContent="space-between"
-      position="fixed"
+      position="absolute"
       px={["4", "16"]}
       textColor="white"
       top="0"

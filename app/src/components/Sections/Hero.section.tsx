@@ -17,11 +17,13 @@ const Hero: NextComponentType = () => {
       gap="6"
       justifyContent="center"
       textAlign="center"
+      mt={{ base: "24", md: "8" }}
+      mb="8"
     >
       <GitHubBadge />
       <MainText />
 
-      <Text color="gray.100" fontSize="xl" opacity="80%" px='4'>
+      <Text color="gray.100" fontSize="xl" opacity="80%" px="4">
         Upload files/images/documents, on your own vault. Powered by IPFS!
       </Text>
       <Button
