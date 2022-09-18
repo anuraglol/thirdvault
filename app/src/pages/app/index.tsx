@@ -56,7 +56,7 @@ const IndexPage: NextPage = () => {
       minH="100vh"
       w="full"
       bgColor="#080910"
-      px="40"
+      px={{ base: "4", md: "40" }}
       color="white"
       pt="4"
       overflowX="hidden"
@@ -64,7 +64,12 @@ const IndexPage: NextPage = () => {
       <UploadImageModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
       <UploadFileModal isOpen={isOpen2} onOpen={onOpen2} onClose={onClose2} />
       <AppNavBar />
-      <Flex align="center" justify="space-between" w="full" pt="28">
+      <Flex
+        align="center"
+        justify="space-between"
+        w="full"
+        pt={{ base: "10", md: "28" }}
+      >
         <Flex align="center" gap="2">
           <BoringAva address={address} />
 
@@ -99,7 +104,11 @@ const IndexPage: NextPage = () => {
         </Flex>
       </Flex>
 
-      <Flex my="8" gap="10">
+      <Flex
+        my="8"
+        gap={{ base: "4", md: "10" }}
+        direction={{ base: "column", md: "row" }}
+      >
         <UploadCard type="Image" onClick={onOpen} />
         <UploadCard type="File" onClick={onOpen2} />
       </Flex>
@@ -116,7 +125,12 @@ const IndexPage: NextPage = () => {
           ) : (
             <>
               {userData?.length > 0 ? (
-                <Flex my="8" gap="10" flexWrap="wrap">
+                <Flex
+                  my="8"
+                  gap="10"
+                  flexWrap="wrap"
+                  justifyContent={{ base: "center", lg: "flex-start" }}
+                >
                   {dataToShow.map((file: IFile) => (
                     <FileCard file={file} key={file.uid} />
                   ))}

@@ -21,7 +21,7 @@ const Hero: NextComponentType = () => {
       <GitHubBadge />
       <MainText />
 
-      <Text color="gray.100" fontSize="xl" opacity="80%">
+      <Text color="gray.100" fontSize="xl" opacity="80%" px='4'>
         Upload files/images/documents, on your own vault. Powered by IPFS!
       </Text>
       <Button

@@ -24,7 +24,7 @@ const ImagePicker = ({
 
   return (
     <Box
-      h="72"
+      h={{ base: "52", md: "72" }}
       w="sm"
       rounded="lg"
       border="dashed 2px"

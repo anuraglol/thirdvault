@@ -25,7 +25,7 @@ const Header: NextComponentType = () => {
     >
       <Link href="/">
         <Text cursor="pointer" fontSize="xl" fontWeight="500">
-          solkudos
+          thirdvault
         </Text>
       </Link>
 

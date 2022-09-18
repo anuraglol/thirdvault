@@ -3,7 +3,7 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 const UploadCard = ({ type, onClick }: any) => {
   return (
     <Box
-      w="72"
+      w={{ base: "80", md: "72" }}
       h="28"
       bgColor="#11131E"
       _hover={{
@@ -17,7 +17,7 @@ const UploadCard = ({ type, onClick }: any) => {
       onClick={onClick}
     >
       <Flex direction="column" justifyContent="space-between" py="4" ml="8">
-        <Text fontSize="lg">Upload a new {type}</Text>
+        <Text fontSize={{ base: "md", md: "lg" }}>Upload a new {type}</Text>
         <Text fontSize="14px">Max Size: 5MB</Text>
       </Flex>
 

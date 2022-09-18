@@ -14,7 +14,7 @@ const AppNavBar: NextComponentType = () => {
       w="full"
     >
       <Text cursor="pointer" fontSize="2xl" fontWeight="500">
-        vault
+        thirdvault
       </Text>
 
       <ConnectWallet />

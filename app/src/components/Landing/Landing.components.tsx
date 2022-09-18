@@ -16,7 +16,7 @@ const GitHubBadge = () => {
             dir="row"
             fontSize="sm"
             h="8"
-            href="https://github.com/buidler-hub/solkudos"
+            href="https://github.com/kr-anurag/thirdvault"
             isExternal
             px="6"
             rounded="full"
