@@ -11,14 +11,14 @@ import { useMemo } from "react";
 import { IFile } from "types/file.types";
 
 const IndexPage: NextPage = () => {
+  const address = useAddress();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     isOpen: isOpen2,
     onOpen: onOpen2,
     onClose: onClose2,
   } = useDisclosure();
-
-  const address = useAddress();
 
   const { contract } = useContract(CONTRACT_ADDRESS);
   const { data, isLoading } = useContractRead(contract, "getFiles");
@@ -84,32 +84,46 @@ const IndexPage: NextPage = () => {
       <Text fontSize="2xl" fontWeight="500">
         Files
       </Text>
-
-      {isLoading ? (
-        <Flex justifyContent="center" w="full">
-          <Spinner size="xl" color="purple.400" />
-        </Flex>
-      ) : (
+      {address ? (
         <>
-          {userData?.length > 0 ? (
-            <Flex my="8" gap="10" flexWrap="wrap">
-              {userData.map((file: IFile) => (
-                <FileCard file={file} key={file.uid} />
-              ))}
+          {isLoading ? (
+            <Flex justifyContent="center" w="full">
+              <Spinner size="xl" color="purple.400" />
             </Flex>
           ) : (
-            <Text
-              fontSize="lg"
-              fontWeight="400"
-              color="rgba(255, 255, 255, 0.6)"
-              fontFamily="argentum"
-              textAlign="center"
-              my="4"
-            >
-              You have no files
-            </Text>
+            <>
+              {userData?.length > 0 ? (
+                <Flex my="8" gap="10" flexWrap="wrap">
+                  {userData.map((file: IFile) => (
+                    <FileCard file={file} key={file.uid} />
+                  ))}
+                </Flex>
+              ) : (
+                <Text
+                  fontSize="lg"
+                  fontWeight="400"
+                  color="rgba(255, 255, 255, 0.6)"
+                  fontFamily="argentum"
+                  textAlign="center"
+                  my="4"
+                >
+                  You have no files
+                </Text>
+              )}
+            </>
           )}
         </>
+      ) : (
+        <Text
+          fontSize="lg"
+          fontWeight="400"
+          color="rgba(255, 255, 255, 0.6)"
+          fontFamily="argentum"
+          textAlign="center"
+          my="4"
+        >
+          Connect your wallet to view your files
+        </Text>
       )}
     </Box>
   );
