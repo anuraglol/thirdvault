@@ -42,7 +42,6 @@ const IndexPage: NextPage = () => {
       return newArr;
     }
   }, [address, data, isLoading]);
-  console.log(userData);
 
   const dataToShow = useMemo(() => {
     if (filesToShow === "all") {

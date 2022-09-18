@@ -5,9 +5,7 @@ pragma solidity ^0.8.0;
 import "hardhat/console.sol";
 
 contract UserVault {
-    constructor () {
-        console.log("Hello, world!");
-    }
+    constructor () {}
 
     struct File {
         address owner;

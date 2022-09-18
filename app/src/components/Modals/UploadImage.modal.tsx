@@ -56,7 +56,6 @@ const UploadImageModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
       setToUpdate(!toUpdate);
       onClose();
     } catch (err) {
-      console.log(err);
       toast.error("Oops! Upload failed");
       setLoading(false);
       onClose();
