@@ -7,15 +7,18 @@ import "@fontsource/argentum-sans/900.css";
 import "@/styles/fonts.css";
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import { Toaster } from "react-hot-toast";
+import { RecoilRoot } from "recoil";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
+    <RecoilRoot>
     <ThirdwebProvider desiredChainId={ChainId.Mumbai} autoConnect>
       <Toaster />
       <ChakraProvider theme={theme}>
         <Component {...pageProps} />
       </ChakraProvider>
     </ThirdwebProvider>
+    </RecoilRoot>
   );
 }
 

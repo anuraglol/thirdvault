@@ -16,8 +16,12 @@ import { useContract, useContractWrite } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "@/lib/constants";
 import { uuid } from "uuidv4";
 import toast from "react-hot-toast";
+import { useRecoilState } from "recoil";
+import { toUpdateAtom } from "@/lib/toUpdate.atom";
 
 const UploadImageModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
+  const [toUpdate, setToUpdate] = useRecoilState(toUpdateAtom);
+
   const [img, setImage] = useState<File>(null);
   const [loading, setLoading] = useState(false);
 
@@ -49,7 +53,7 @@ const UploadImageModal: FC<modalProps> = ({ isOpen, onOpen, onClose }) => {
 
       toast.success("Image uploaded successfully!");
       setLoading(false);
-
+      setToUpdate(!toUpdate);
       onClose();
     } catch (err) {
       console.log(err);

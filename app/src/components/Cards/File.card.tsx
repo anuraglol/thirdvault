@@ -18,13 +18,16 @@ import { useContract, useContractWrite } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "@/lib/constants";
 import toast from "react-hot-toast";
 import download from "downloadjs";
+import { useRecoilState } from "recoil";
+import { toUpdateAtom } from "@/lib/toUpdate.atom";
 
 interface IProps {
   file: IFile;
 }
 
 const FileCard: FC<IProps> = ({ file }) => {
-  console.log(file);
+  const [toUpdate, setToUpdate] = useRecoilState(toUpdateAtom);
+
   const { contract } = useContract(CONTRACT_ADDRESS);
   const { mutateAsync: deleteFile, isLoading } = useContractWrite(
     contract,
@@ -40,18 +43,18 @@ const FileCard: FC<IProps> = ({ file }) => {
       });
 
       const url = `https://ipfs.io/ipfs/${res.data.cid}/${file.name}`;
-      console.log(url);
       setFileUrl(url);
     };
 
     fetchData();
-  }, [file.cid, file.name]);
+  }, [file.cid, file.name, toUpdate]);
 
   const handleDelete = async () => {
     try {
       const data = await deleteFile([file.uid]);
 
       toast.success("File deleted successfully");
+      setToUpdate(!toUpdate);
     } catch (err) {
       toast.error("Something went wrong");
     }

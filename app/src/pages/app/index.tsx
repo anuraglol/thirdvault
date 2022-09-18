@@ -1,7 +1,12 @@
 import { UploadFileModal, UploadImageModal } from "@/components";
 import { Box, Flex, Spinner, Text, useDisclosure } from "@chakra-ui/react";
 import { NextPage } from "next";
-import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
+import {
+  contractType,
+  useAddress,
+  useContract,
+  useContractRead,
+} from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "@/lib/constants";
 import { BoringAva } from "@/components/misc/boringAva";
 import { UploadCard } from "@/components/Cards/Upload.card";
