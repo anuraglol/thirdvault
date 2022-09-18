@@ -10,6 +10,7 @@ Store all your secret files on your own secured vault, powered by IPFS and third
 - Store your files secretely on your own vault
 - Download files
 - Operation on files
+- Files are encrypted using the `HMAC-SHA256` algorithm and are safely stored.
 
 ### Technologies Used
 
