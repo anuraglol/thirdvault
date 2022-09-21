@@ -21,7 +21,7 @@ Store all your secret files on your own secured vault, powered by IPFS and third
 
 #### Thirdweb
 
-This project uses the `thirdweb-dev/reavt` sdk to authenticate users using their wallet and to interact with our custom contract.
+This project uses the `thirdweb-dev/react` sdk to authenticate users using their wallet and to interact with our custom contract.
 
 As for the contract, its deployed using the `thirdweb deploy` command and uses `thirdweb releases` as the registry to publish new versions.
 
